@@ -31,11 +31,15 @@ namespace Torres_de_Hanoi
         public String Top { get; set; }        
         */
        
-        public Disco Top 
+        public int Top 
         {
 			get 
             {
-                return Elementos.Last<Disco>();
+                if (this.isEmpty())
+				{
+                    return 0;
+				}
+                return Elementos.Last<Disco>().Valor;
             }
         }
 
@@ -66,8 +70,9 @@ namespace Torres_de_Hanoi
 	        {
                 return null;
 	        }
-            Disco elem = Top;
+            Disco elem = Elementos.Last<Disco>();
             Elementos.Remove(elem);
+            Elementos = Elementos;
             return elem;
         }                
 
