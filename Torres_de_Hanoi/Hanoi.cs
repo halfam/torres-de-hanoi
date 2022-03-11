@@ -11,15 +11,17 @@ namespace Torres_de_Hanoi
         /*TODO: Implementar métodos*/
         public void mover_disco(Pila a, Pila b)
         {
-			if (a.Top < b.Top || b.Top ==0)
+			if (a.Top < b.Top )
 			{
-                a.push(b.pop());
+				Console.WriteLine("Moviendo de " + a.Nombre + " a " + b.Nombre);
+                b.push(a.pop());
 			}
 			else
 			{
 				if (a.Top != b.Top)
 				{
-                    b.push(a.pop());
+					Console.WriteLine("Moviendo de " + b.Nombre + " a " + a.Nombre);
+					a.push(b.pop());
 				}
 			}
         }
@@ -31,11 +33,11 @@ namespace Torres_de_Hanoi
 			{
 				while (fin.Size != n)
 				{
-					m++; 
+					r++;
 					mover_disco(ini, fin);
-					m++;
+					r++;
 					mover_disco(ini, aux);
-					m++;
+					r++;
 					mover_disco(aux, fin);
 				}
 			}
@@ -53,6 +55,26 @@ namespace Torres_de_Hanoi
 			}
             return m;
         }
+		public int r = 0;
+		public int recursivo(int n, Pila ini, Pila fin, Pila aux)
+		{
+			if (n == 1)
+			{
+				r++;
+
+				mover_disco(ini, fin);
+			}
+			else
+			{
+				r++;
+
+				recursivo(n - 1, ini, fin, aux);
+				mover_disco(ini, fin);
+				recursivo(n-1, aux, fin, aux);
+			}
+			return r;
+		}
+		
 
     }
 }

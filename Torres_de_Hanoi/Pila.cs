@@ -17,6 +17,7 @@ namespace Torres_de_Hanoi
     class Pila
     {
         private int _size;
+        public string Nombre { get; set; }
         public int Size
         { 
             get 
@@ -37,7 +38,7 @@ namespace Torres_de_Hanoi
             {
                 if (this.isEmpty())
 				{
-                    return 0;
+                    return int.MaxValue;
 				}
                 return Elementos.Last<Disco>().Valor;
             }
@@ -49,12 +50,14 @@ namespace Torres_de_Hanoi
        */
         public List<Disco> Elementos { get; set; }
         /* TODO: Implementar métodos */
-        public Pila()
+        public Pila(string nombre)
         {
+            this.Nombre =  nombre;
             Elementos = new List<Disco>();
         }
-        public Pila(List<Disco> discos)
+        public Pila(string nombre, List<Disco> discos)
         {
+            this.Nombre = nombre;
             Elementos = discos;
         }
 
