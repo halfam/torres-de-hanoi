@@ -14,5 +14,9 @@ namespace Torres_de_Hanoi
         public String Valor { get; set; }
         */
         public int Valor { get; set; }
+        public string ToString()
+		{
+            return Valor.ToString();
+		}
     }
 }

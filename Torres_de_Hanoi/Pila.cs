@@ -36,11 +36,15 @@ namespace Torres_de_Hanoi
         {
 			get 
             {
+                //Console.WriteLine(this.Nombre + " Cantidad de elementos : " + this.Size);
                 if (this.isEmpty())
 				{
                     return int.MaxValue;
 				}
-                return Elementos.Last<Disco>().Valor;
+				try { return Elementos.ElementAt(Elementos.Count - 1).Valor; }
+                catch { return 0; }
+                
+                //return Elementos.Last<Disco>().Valor;
             }
         }
 
@@ -63,28 +67,25 @@ namespace Torres_de_Hanoi
 
         public void push(Disco d)
         {
-            Elementos.Add(d);
-	        
+           Elementos.Add(d);
+           //Elementos = Elementos;
         }
 
         public Disco pop()
         {
-            if (this.isEmpty())
+            /*if (this.isEmpty())
 	        {
                 return null;
-	        }
+	        }*/
             Disco elem = Elementos.Last<Disco>();
             Elementos.Remove(elem);
-            Elementos = Elementos;
+           // Elementos = Elementos;
             return elem;
         }                
 
         public bool isEmpty()
         {
-            if (Size == 0)
-                return true;
-            else
-                return false;
+            return Size == 0;
         }
 
     }
