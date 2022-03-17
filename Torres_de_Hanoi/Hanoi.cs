@@ -11,49 +11,61 @@ namespace Torres_de_Hanoi
         /*TODO: Implementar métodos*/
         public void mover_disco(Pila a, Pila b)
         {
-			if (a.Top < b.Top && a.Top!=0)
+			if (a.Top < b.Top)
 			{
 				Console.WriteLine("Moviendo " + a.Top +" de " + a.Nombre + " a " + b.Nombre);
                 b.push(a.pop());
 			}
 			else
 			{
-				//if (a.Top != b.Top )
-				//{
 					Console.WriteLine("Moviendo " + b.Top + " de " + b.Nombre + " a " + a.Nombre);
 					a.push(b.pop());
-			//	}
 			}
         }
 
         public int iterativo(int n, Pila ini, Pila fin, Pila aux)
         {
 			int m = 0;
-			if (n % 2 == 0)
+			if (n % 2 != 0)
 			{
-				while (!ini.isEmpty() || !aux.isEmpty())
+				while (fin.Size!=n)
 				{
-					
 					r++;
 					mover_disco(ini, fin);
+                    if (fin.Size == n)
+                    {
+						break;
+                    }
 					r++;
 					mover_disco(ini, aux);
+					if (fin.Size == n)
+					{
+						break;
+
+					}
 					r++;
 					mover_disco(aux, fin);
-					/*Console.WriteLine("Top fin " + fin.Top);
-					Console.WriteLine("Top aux " + aux.Top);
-					Console.WriteLine("Top ini " + ini.Top);
-					Console.WriteLine(n);*/
 				}
 			}
 			else
 			{
-				while (!ini.isEmpty() || !aux.isEmpty())
+				while (fin.Size != n)
 				{
+
 					r++;
 					mover_disco(ini, aux);
+					if (fin.Size == n)
+					{
+						break;
+
+					}
 					r++; 
 					mover_disco(ini, fin);
+					if (fin.Size == n)
+					{
+						break;
+
+					}
 					r++; 
 					mover_disco(aux, fin);
 				}
@@ -66,16 +78,14 @@ namespace Torres_de_Hanoi
 			if (n == 1)
 			{
 				r++;
-
 				mover_disco(ini, fin);
 			}
 			else
 			{
+				recursivo(n - 1, ini, aux, fin);
 				r++;
-
-				recursivo(n - 1, ini, fin, aux);
 				mover_disco(ini, fin);
-				recursivo(n-1, aux, fin, aux);
+				recursivo(n-1, aux, fin, ini);
 			}
 			return r;
 		}

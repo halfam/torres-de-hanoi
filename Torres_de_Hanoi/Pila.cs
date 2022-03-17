@@ -17,12 +17,14 @@ namespace Torres_de_Hanoi
     class Pila
     {
         private int _size;
+        private string _nombre;
+        
         public string Nombre { get; set; }
         public int Size
         { 
             get 
             {
-                return Elementos.Count;
+                return _elementos.Count;
             }
 			
         }
@@ -36,15 +38,11 @@ namespace Torres_de_Hanoi
         {
 			get 
             {
-                //Console.WriteLine(this.Nombre + " Cantidad de elementos : " + this.Size);
                 if (this.isEmpty())
 				{
                     return int.MaxValue;
 				}
-				try { return Elementos.ElementAt(Elementos.Count - 1).Valor; }
-                catch { return 0; }
-                
-                //return Elementos.Last<Disco>().Valor;
+                return Elementos.Last<Disco>().Valor;
             }
         }
 
@@ -52,7 +50,25 @@ namespace Torres_de_Hanoi
        public Disco[] Elementos { get; set; }
        public List<Disco> Elementos { get; set; }
        */
-        public List<Disco> Elementos { get; set; }
+        private List<Disco> _elementos;
+        public List<Disco> Elementos
+        {
+            get
+            {
+                return _elementos;
+            }
+            set
+            {
+                _elementos = new List<Disco>();
+                for (int i = 0; i < value.Count; i++)
+                {
+                    if (value.ElementAt(i) != null)
+                    {
+                        _elementos.Add(value.ElementAt(i));
+                    }
+                }
+            }
+        }
         /* TODO: Implementar métodos */
         public Pila(string nombre)
         {
@@ -68,18 +84,18 @@ namespace Torres_de_Hanoi
         public void push(Disco d)
         {
            Elementos.Add(d);
-           //Elementos = Elementos;
+           Elementos = Elementos;
         }
 
         public Disco pop()
         {
-            /*if (this.isEmpty())
+            if (this.isEmpty())
 	        {
                 return null;
-	        }*/
+	        }
             Disco elem = Elementos.Last<Disco>();
             Elementos.Remove(elem);
-           // Elementos = Elementos;
+            Elementos = Elementos;
             return elem;
         }                
 
